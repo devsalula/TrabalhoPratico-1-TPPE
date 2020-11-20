@@ -1,5 +1,6 @@
-def read_file():
-    pass
+def read_file(file_name):
+    file = open(file_name)
+    return file.read()
 
 def main():
     print("Hello World")
