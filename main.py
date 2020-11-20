@@ -1,3 +1,6 @@
+def read_file():
+    pass
+
 def main():
     print("Hello World")
 
