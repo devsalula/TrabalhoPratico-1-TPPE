@@ -36,10 +36,11 @@ def test_invalid_response_file(test_input):
     with pytest.raises(EscritaNaoPermitidaException):
         assert response_file(test_input)
 
-def test_sequence_format():
-    exit_format = 'l'
-    assert sequence_format(exit_format) == exit_format
-
-def test_invalid_sequence_format():
+@pytest.mark.parametrize("test_input,expected", [('l', 'l'), ('c', 'c')])
+def test_sequence_format(test_input, expected):
+    assert sequence_format(test_input) == expected
+    
+@pytest.mark.parametrize("test_input", [('j'), ('linha'), ('quero coluna')])
+def test_invalid_sequence_format(test_input):
     with pytest.raises(FormatoInvalidoException):
-        assert sequence_format('d')
+        assert sequence_format(test_input)
