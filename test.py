@@ -14,10 +14,11 @@ def test_file_not_found(test_input):
     with pytest.raises(ArquivoNaoEncontradoException):
         assert read_file(test_input)
 
-def test_delimiter_input():
-    symbol = ';'
-    assert delimiter_input(symbol) == ';'
+@pytest.mark.parametrize("test_input,expected", [(';', ';'), (':', ':'), ('\n', '\n')])
+def test_delimiter_input(test_input, expected):
+    assert delimiter_input(test_input) == expected
 
-def test_invalid_delimit():
+@pytest.mark.parametrize("test_input", [('delimitador invalido'), ('invalid delimit'), ('delimitador no válido')])
+def test_invalid_delimit(test_input):
     with pytest.raises(DelimitadorInvalidoException):
-        assert delimiter_input('delimitador invalido')
+        assert delimiter_input(test_input)
