@@ -26,11 +26,11 @@ def test_invalid_delimit(test_input):
     with pytest.raises(DelimitadorInvalidoException):
         assert delimiter_input(test_input)
 
-def test_response_file():
-    filename = 'assets/response.out'
-    assert type(response_file(filename)) == io.TextIOWrapper
+@pytest.mark.parametrize("test_input", [('assets/teste.out'), ('assets/valido.out')])
+def test_response_file(test_input):
+    assert type(response_file(test_input)) == io.TextIOWrapper
 
-def test_invalid_response_file():
-    filename = "pasta/error.txt"
+@pytest.mark.parametrize("test_input", [('./error/failed.txt'), ('./error/failed.txt')])
+def test_invalid_response_file(test_input):
     with pytest.raises(EscritaNaoPermitidaException):
-        assert response_file(filename)
+        assert response_file(test_input)
