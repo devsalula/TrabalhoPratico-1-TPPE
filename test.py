@@ -1,7 +1,7 @@
 import pytest
 import io
 
-from main import read_file, delimiter_input, response_file, sequence_format, parse_data
+from main import read_file, delimiter_input, response_file, sequence_format, parse_data, write_response
 from test_data import content_mock1, expected_mock1, content_mock2, expected_mock2
 
 from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoException
@@ -50,3 +50,8 @@ def test_invalid_sequence_format(test_input):
 @pytest.mark.parametrize("content, delimit, exit_format, expected", [(content_mock1, ';', 'l', expected_mock1), (content_mock2, ';', 'c', expected_mock2)])
 def test_parse_data(content, delimit, exit_format, expected):
     assert parse_data(content, delimit, exit_format) == expected
+
+def test_write_response():
+    file = open('./assets/teste.out', 'w')
+    content = expected_mock1
+    assert write_response(file, content) == 'Escrita bem sucedida'

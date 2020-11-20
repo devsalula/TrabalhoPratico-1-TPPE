@@ -59,7 +59,10 @@ def parse_data(content, delimit, exit_format):
         
         sequence_content += '\n'
     
-    return sequence_content   
+    return sequence_content
+
+def write_response(file, content):
+    pass
 
 def main():
     print("Hello World")
