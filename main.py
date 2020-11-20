@@ -23,7 +23,7 @@ def response_file(filename):
         raise EscritaNaoPermitidaException(filename)
 
 def sequence_format(exit_format):
-    pass
+    return exit_format
 
 def main():
     print("Hello World")
