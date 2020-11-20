@@ -10,7 +10,7 @@ def read_file(file_name):
 
 def delimiter_input(symbol):
     if len(symbol) == 1:
-        return ';'
+        return symbol
     else:
         raise DelimitadorInvalidoException(symbol)
 
