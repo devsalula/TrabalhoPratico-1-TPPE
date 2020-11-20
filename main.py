@@ -1,6 +1,7 @@
 from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoException
 from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
 from exceptions.EscritaNaoPermitidaException import EscritaNaoPermitidaException
+from exceptions.FormatoInvalidoException import FormatoInvalidoException
 
 def read_file(file_name):
     try:
@@ -23,7 +24,10 @@ def response_file(filename):
         raise EscritaNaoPermitidaException(filename)
 
 def sequence_format(exit_format):
-    return exit_format
+    if exit_format == 'c' or exit_format == 'l':
+        return exit_format
+    else:
+        raise FormatoInvalidoException(exit_format)
 
 def main():
     print("Hello World")
