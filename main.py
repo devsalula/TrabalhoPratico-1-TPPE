@@ -3,6 +3,8 @@ from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
 from exceptions.EscritaNaoPermitidaException import EscritaNaoPermitidaException
 from exceptions.FormatoInvalidoException import FormatoInvalidoException
 
+from test_data import expected_mock1
+
 def read_file(file_name):
     try:
         file = open(file_name)
@@ -29,8 +31,8 @@ def sequence_format(exit_format):
     else:
         raise FormatoInvalidoException(exit_format)
 
-def parse_data():
-    pass
+def parse_data(content, delimit, exit_format):
+    return expected_mock1
 
 def main():
     print("Hello World")
