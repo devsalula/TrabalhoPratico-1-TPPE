@@ -29,5 +29,8 @@ def sequence_format(exit_format):
     else:
         raise FormatoInvalidoException(exit_format)
 
+def parse_data():
+    pass
+
 def main():
     print("Hello World")

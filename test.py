@@ -1,12 +1,14 @@
 import pytest
 import io
 
-from main import read_file, delimiter_input, response_file, sequence_format
+from main import read_file, delimiter_input, response_file, sequence_format, parse_data
+from test_data import content_mock1, expected_mock1
 
 from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoException
 from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
 from exceptions.EscritaNaoPermitidaException import EscritaNaoPermitidaException
 from exceptions.FormatoInvalidoException import FormatoInvalidoException
+
 
 @pytest.mark.parametrize("test_input,expected", [('./assets/test.out', 'Hello World'), ('./assets/test1.out', 'Ola Mundo'), ('./assets/test2.out', 'Hola Mundo')])
 def test_read_file(test_input, expected):
@@ -44,3 +46,9 @@ def test_sequence_format(test_input, expected):
 def test_invalid_sequence_format(test_input):
     with pytest.raises(FormatoInvalidoException):
         assert sequence_format(test_input)
+
+def test_parse_data():
+    content = content_mock1
+    delimit = ';'
+    exit_format = 'c'
+    assert parse_data(content, delimit, exit_format) == expected_mock1
