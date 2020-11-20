@@ -1,7 +1,7 @@
 import pytest
 import io
 
-from main import read_file, delimiter_input, response_file
+from main import read_file, delimiter_input, response_file, sequence_format
 
 from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoException
 from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
@@ -34,3 +34,7 @@ def test_response_file(test_input):
 def test_invalid_response_file(test_input):
     with pytest.raises(EscritaNaoPermitidaException):
         assert response_file(test_input)
+
+def test_sequence_format():
+    exit_format = 'l'
+    assert sequence_format(exit_format) == exit_format

@@ -22,6 +22,8 @@ def response_file(filename):
     except:
         raise EscritaNaoPermitidaException(filename)
 
+def sequence_format(exit_format):
+    pass
 
 def main():
     print("Hello World")
