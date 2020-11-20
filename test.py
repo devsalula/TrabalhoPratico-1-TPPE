@@ -7,6 +7,7 @@ def test_read_file(test_input, expected):
     file = read_file(test_input)
     assert file == expected
 
-def test_file_not_found():
+@pytest.mark.parametrize("test_input", [('./error/test.out'), ('./error/failed.out'), ('./error/failed/test2.out')])
+def test_file_not_found(test_input):
     with pytest.raises(ArquivoNaoEncontradoException):
-        assert read_file("./assets/n_existe.out")
+        assert read_file(test_input)
