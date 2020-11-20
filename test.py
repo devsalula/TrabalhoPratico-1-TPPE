@@ -2,7 +2,7 @@ import pytest
 import io
 
 from main import read_file, delimiter_input, response_file, sequence_format, parse_data
-from test_data import content_mock1, expected_mock1
+from test_data import content_mock1, expected_mock1, content_mock2, expected_mock2
 
 from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoException
 from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
@@ -47,8 +47,6 @@ def test_invalid_sequence_format(test_input):
     with pytest.raises(FormatoInvalidoException):
         assert sequence_format(test_input)
 
-def test_parse_data():
-    content = content_mock1
-    delimit = ';'
-    exit_format = 'c'
-    assert parse_data(content, delimit, exit_format) == expected_mock1
+@pytest.mark.parametrize("content, delimit, exit_format, expected", [(content_mock1, ';', 'l', expected_mock1), (content_mock2, ';', 'c', expected_mock2)])
+def test_parse_data(content, delimit, exit_format, expected):
+    assert parse_data(content, delimit, exit_format) == expected
