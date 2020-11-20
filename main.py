@@ -62,7 +62,7 @@ def parse_data(content, delimit, exit_format):
     return sequence_content
 
 def write_response(file, content):
-    pass
+    return 'Escrita bem sucedida'
 
 def main():
     print("Hello World")
