@@ -5,6 +5,7 @@ from main import read_file, delimiter_input, response_file
 
 from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoException
 from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
+from exceptions.EscritaNaoPermitidaException import EscritaNaoPermitidaException
 
 @pytest.mark.parametrize("test_input,expected", [('./assets/test.out', 'Hello World'), ('./assets/test1.out', 'Ola Mundo'), ('./assets/test2.out', 'Hola Mundo')])
 def test_read_file(test_input, expected):
@@ -28,3 +29,8 @@ def test_invalid_delimit(test_input):
 def test_response_file():
     filename = 'assets/response.out'
     assert type(response_file(filename)) == io.TextIOWrapper
+
+def test_invalid_response_file():
+    filename = "pasta/error.txt"
+    with pytest.raises(EscritaNaoPermitidaException):
+        assert response_file(filename)
