@@ -6,6 +6,7 @@ from main import read_file, delimiter_input, response_file, sequence_format
 from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoException
 from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
 from exceptions.EscritaNaoPermitidaException import EscritaNaoPermitidaException
+from exceptions.FormatoInvalidoException import FormatoInvalidoException
 
 @pytest.mark.parametrize("test_input,expected", [('./assets/test.out', 'Hello World'), ('./assets/test1.out', 'Ola Mundo'), ('./assets/test2.out', 'Hola Mundo')])
 def test_read_file(test_input, expected):
@@ -38,3 +39,7 @@ def test_invalid_response_file(test_input):
 def test_sequence_format():
     exit_format = 'l'
     assert sequence_format(exit_format) == exit_format
+
+def test_invalid_sequence_format():
+    with pytest.raises(FormatoInvalidoException):
+        assert sequence_format('d')
