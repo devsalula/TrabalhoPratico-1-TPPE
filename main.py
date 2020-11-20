@@ -14,5 +14,8 @@ def delimiter_input(symbol):
     else:
         raise DelimitadorInvalidoException(symbol)
 
+def response_file():
+    pass
+
 def main():
     print("Hello World")

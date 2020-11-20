@@ -1,6 +1,8 @@
 import pytest
+import io
 
-from main import read_file, delimiter_input
+from main import read_file, delimiter_input, response_file
+
 from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoException
 from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
 
@@ -22,3 +24,7 @@ def test_delimiter_input(test_input, expected):
 def test_invalid_delimit(test_input):
     with pytest.raises(DelimitadorInvalidoException):
         assert delimiter_input(test_input)
+
+def test_response_file():
+    filename = 'assets/response.out'
+    assert type(response_file(filename)) == io.TextIOWrapper
