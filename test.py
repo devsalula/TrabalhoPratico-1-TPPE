@@ -1,6 +1,8 @@
 import pytest
-from main import read_file
+
+from main import read_file, delimiter_input
 from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoException
+from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
 
 @pytest.mark.parametrize("test_input,expected", [('./assets/test.out', 'Hello World'), ('./assets/test1.out', 'Ola Mundo'), ('./assets/test2.out', 'Hola Mundo')])
 def test_read_file(test_input, expected):
@@ -11,3 +13,11 @@ def test_read_file(test_input, expected):
 def test_file_not_found(test_input):
     with pytest.raises(ArquivoNaoEncontradoException):
         assert read_file(test_input)
+
+def test_delimiter_input():
+    symbol = ';'
+    assert delimiter_input(symbol) == ';'
+
+def test_invalid_delimit():
+    with pytest.raises(DelimitadorInvalidoException):
+        assert delimiter_input('delimitador invalido')
