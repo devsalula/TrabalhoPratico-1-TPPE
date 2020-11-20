@@ -1,6 +1,6 @@
 from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoException
 from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
-from exceptions.EscritaNãoPermitidaException import EscritaNãoPermitidaException
+from exceptions.EscritaNaoPermitidaException import EscritaNaoPermitidaException
 
 def read_file(file_name):
     try:
@@ -16,8 +16,11 @@ def delimiter_input(symbol):
         raise DelimitadorInvalidoException(symbol)
 
 def response_file(filename):
-    file = open(filename, "w")
-    return file
+    try:
+        file = open(filename, "w")
+        return file
+    except:
+        raise EscritaNaoPermitidaException(filename)
 
 
 def main():
