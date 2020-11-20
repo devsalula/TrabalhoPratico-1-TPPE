@@ -14,8 +14,9 @@ def delimiter_input(symbol):
     else:
         raise DelimitadorInvalidoException(symbol)
 
-def response_file():
-    pass
+def response_file(filename):
+    file = open("./teste.txt", "w")
+    return file
 
 def main():
     print("Hello World")
