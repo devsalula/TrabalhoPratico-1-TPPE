@@ -5,7 +5,7 @@ from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoExcepti
 from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
 from exceptions.EscritaNaoPermitidaException import EscritaNaoPermitidaException
 from exceptions.FormatoInvalidoException import FormatoInvalidoException
-
+from exceptions.EscritaFalhaException import EscritaFalhaException
 
 def read_file(file_name):
     try:
@@ -62,9 +62,12 @@ def parse_data(content, delimit, exit_format):
     return sequence_content
 
 def write_response(file, content):
-    file.write(content)
-    file.close()
-    return 'Escrita bem sucedida'
+    try:
+        file.write(content)
+        file.close()
+        return 'Escrita bem sucedida'
+    except:
+        raise EscritaFalhaException()
 
 def main():
     print("Hello World")
