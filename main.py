@@ -7,6 +7,7 @@ from exceptions.EscritaNaoPermitidaException import EscritaNaoPermitidaException
 from exceptions.FormatoInvalidoException import FormatoInvalidoException
 from exceptions.EscritaFalhaException import EscritaFalhaException
 
+
 def read_file(file_name):
     try:
         file = open(file_name)
