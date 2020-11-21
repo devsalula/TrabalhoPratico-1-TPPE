@@ -20,9 +20,13 @@ def delimiter_input(symbol):
     else:
         raise DelimitadorInvalidoException(symbol)
 
-def response_file(filename):
+def response_file(filename, filename_exit):
     try:
-        file = open(filename, "w")
+        filename_array = filename.split('.')
+        filename = filename_array[0]
+        if filename_exit[-1] != '/':
+            filename_exit += '/'
+        file = open(filename_exit + filename + 'Tab.out', "w")
         return file
     except:
         raise EscritaNaoPermitidaException(filename)
@@ -74,8 +78,10 @@ def main():
     content = read_file(filename)
     delimit = input("Insira o delimitador desejado: ")
     delimit_valid = delimiter_input(delimit)
-    filename_exit = input("Insira o nome do arquivo de saída: ")
-    file = response_file(filename_exit)
+    filename_exit = input("Insira o caminho do arquivo de saída: ")
+    filename_array = filename.split('/')
+    filename = filename_array[-1]
+    file = response_file(filename, filename_exit)
     exit_format = input("Insira o tipo de saída - c para Coluna, l - para linha: ")
     exit_format_valid = sequence_format(exit_format)
     content_parsed = parse_data(content, delimit_valid, exit_format_valid)
