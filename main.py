@@ -70,4 +70,17 @@ def write_response(file, content):
         raise EscritaFalhaException()
 
 def main():
-    print("Hello World")
+    filename = input("Insira o caminho do seu arquivo: ") 
+    content = read_file(filename)
+    delimit = input("Insira o delimitador desejado: ")
+    delimit_valid = delimiter_input(delimit)
+    filename_exit = input("Insira o nome do arquivo de saída: ")
+    file = response_file(filename_exit)
+    exit_format = input("Insira o tipo de saída - c para Coluna, l - para linha: ")
+    exit_format_valid = sequence_format(exit_format)
+    content_parsed = parse_data(content, delimit_valid, exit_format_valid)
+    write_response(file, content_parsed)
+    print("Fim do Programa!")
+
+if __name__ == "__main__":
+    main()
