@@ -30,14 +30,14 @@ def test_invalid_delimit(test_input):
     with pytest.raises(DelimitadorInvalidoException):
         assert delimiter_input(test_input)
 
-@pytest.mark.parametrize("test_input", [('assets/teste.out'), ('assets/valido.out')])
-def test_response_file(test_input):
-    assert type(response_file(test_input)) == io.TextIOWrapper
+@pytest.mark.parametrize("filename_exit, filename, expected", [('assets', 'test.out', 'assets/testTab.out'), ('./', 'valido.out', './validoTab.out')])
+def test_response_file(filename_exit, filename, expected):
+    assert response_file(filename, filename_exit).name == expected
 
-@pytest.mark.parametrize("test_input", [('./error/failed.txt'), ('./error/failed.txt')])
-def test_invalid_response_file(test_input):
+@pytest.mark.parametrize("filename_exit, filename", [('error', 'failed.txt'), ('../test', 'failedInvalid.txt')])
+def test_invalid_response_file(filename_exit, filename):
     with pytest.raises(EscritaNaoPermitidaException):
-        assert response_file(test_input)
+        assert response_file(filename, filename_exit)
 
 @pytest.mark.parametrize("test_input,expected", [('l', 'l'), ('c', 'c')])
 def test_sequence_format(test_input, expected):
