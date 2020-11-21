@@ -8,6 +8,7 @@ from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoExcepti
 from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
 from exceptions.EscritaNaoPermitidaException import EscritaNaoPermitidaException
 from exceptions.FormatoInvalidoException import FormatoInvalidoException
+from exceptions.EscritaFalhaException import EscritaFalhaException
 
 
 @pytest.mark.parametrize("test_input,expected", [('./assets/test.out', 'Hello World'), ('./assets/test1.out', 'Ola Mundo'), ('./assets/test2.out', 'Hola Mundo')])
@@ -55,3 +56,8 @@ def test_write_response():
     file = open('./assets/teste.out', 'w')
     content = expected_mock1
     assert write_response(file, content) == 'Escrita bem sucedida'
+
+def test_write_response_failed():
+    content = expected_mock1
+    with pytest.raises(EscritaFalhaException):
+        assert write_response(None, content)
