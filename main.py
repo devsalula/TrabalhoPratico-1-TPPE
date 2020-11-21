@@ -34,7 +34,7 @@ def sequence_format(exit_format):
         raise FormatoInvalidoException(exit_format)
 
 def parse_data(content, delimit, exit_format):
-    content = re.sub(r"\n---------- Evolution \d+ ----------", "---", content)
+    content = re.sub(r"-+ Evolution \d+ -+", "---", content)
     lines = content.split('---')
     lines = list(filter(lambda a: a != '', lines))
     line_content = []
