@@ -1,5 +1,4 @@
-content_mock1 = """
----------- Evolution 1 ----------
+content_mock1 = """---------- Evolution 1 ----------
 456
 782
 755
@@ -23,8 +22,7 @@ content_mock1 = """
 771
 """
 
-content_mock2 = """
----------- Evolution 1 ----------
+content_mock2 = """---------- Evolution 1 ----------
 458
 973
 803
