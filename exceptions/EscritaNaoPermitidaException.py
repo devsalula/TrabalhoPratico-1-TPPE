@@ -1,7 +1,7 @@
 class EscritaNaoPermitidaException(Exception):
 
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, path):
+        self.path = path
         
     def __str__(self):
-        return 'Arquivo %s não pode ser criado' % self.filename
+        return 'Arquivo não pode ser escrito no caminho %s' % self.path
