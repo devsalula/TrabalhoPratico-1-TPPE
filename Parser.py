@@ -14,12 +14,15 @@ class Parser:
     def read_file(self, filename):
         try:
             file = open(filename)
-            filename_array = filename.split('/')
-            filename = filename_array[-1]
-            self.filename = filename
+            self.content = file.read()
+            self.extract_filename(filename)
         except:
             raise ArquivoNaoEncontradoException(filename)
-        self.content = file.read()
+
+    def extract_filename(self, filename):
+        filename_array = filename.split('/')
+        filename = filename_array[-1]
+        self.filename = filename
 
     def delimiter_input(self, delimiter):
         if len(delimiter) == 1:
