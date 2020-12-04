@@ -2,27 +2,21 @@ import re
 import numpy
 import os
 
-from exceptions.ArquivoNaoEncontradoException import ArquivoNaoEncontradoException
+from exceptions.EscritaFalhaException import EscritaFalhaException
 from exceptions.DelimitadorInvalidoException import DelimitadorInvalidoException
 from exceptions.EscritaNaoPermitidaException import EscritaNaoPermitidaException
 from exceptions.FormatoInvalidoException import FormatoInvalidoException
-from exceptions.EscritaFalhaException import EscritaFalhaException
-
 from parse_data import ParseData
+from persistencia import Persistencia
+
 class Parser:
 
-    def read_file(self, filename):
-        try:
-            file = open(filename)
-            self.content = file.read()
-            self.filename = self.extract_filename(filename, -1, '/')
-        except:
-            raise ArquivoNaoEncontradoException(filename)
+    def __init__(self):
+        self.persistencia = Persistencia()
 
-    def extract_filename(self, filename, position, character_split):
-        filename_array = filename.split(character_split)
-        filename = filename_array[position]
-        return filename
+    def read_file(self, filename):
+        self.persistencia.read_file(filename)
+        self.set_content(self.persistencia.get_content())
 
     def delimiter_input(self, delimiter):
         if len(delimiter) == 1:
@@ -45,18 +39,18 @@ class Parser:
         else:
             raise FormatoInvalidoException(exit_format)
 
+    def get_content(self):
+        return self.content
+
+    def set_content(self, content):
+        self.content = content
+
     def parse_data(self):
-        parser_service = ParseData(self, r"-+ Evolution \d+ -+", "---")
+        parser_service = ParseData(self, self.get_content(), r"-+ Evolution \d+ -+", "---")
         self.parsed_data = parser_service.compute()
 
     def write_response(self):
         try:
-            filename = self.extract_filename(self.filename, 0, '.')
-            file = open(self.path + filename + 'Tab.out', "w")
-            file.write(self.parsed_data)
-            file.close()
-            return 'Escrita bem sucedida'
-        except Exception as err:
-            print(err)
+            return self.persistencia.write_response(self.path, self.parsed_data)
+        except:
             raise EscritaFalhaException()
-

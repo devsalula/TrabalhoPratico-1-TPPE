@@ -3,13 +3,14 @@ import numpy
 
 class ParseData:
 
-    def __init__(self, parser, pattern_to_match, pattern_to_sub):
+    def __init__(self, parser, content, pattern_to_match, pattern_to_sub):
         self.__parser = parser
         self.__pattern_to_match = pattern_to_match
         self.__pattern_to_sub = pattern_to_sub
+        self.__content = content
 
     def compute(self):
-        self.__content = re.sub(self.__pattern_to_match, self.__pattern_to_sub, self.__parser.content)
+        self.__content = re.sub(self.__pattern_to_match, self.__pattern_to_sub, self.__content)
         self.__lines = self.__content.split(self.__pattern_to_sub)
         self.__lines = list(filter(lambda a: a != '', self.__lines))
         self.__line_content = []
